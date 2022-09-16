@@ -2,37 +2,55 @@
 Name: Samuel Lee
 Date: 9/13/2022
 Info: compares date of births and returns older, assignment 1.
-
 */
 
 import java.util.Scanner;
 
+
 public class AgeComparison {
 
-    /*
-    int agesplitter(int age) {
-        String dobirth = Integer.toString(age);
+/*
+a slight alteration from a code within textbook: the textbook code outputs
+current time, this code outputs current year.
+(Liang 52)
+*/
 
-        String year = dobirth.substring(0, 4);
-        String month = dobirth.substring(4, 6);
-        String date = dobirth.substring(6, 8);
+    long CurrentTime() {
+        // Obtain the total milliseconds since midnight, Jan 1, 1970
+        long totalMilliseconds = System.currentTimeMillis();
 
-        int years = Integer.parseInt(year);
-        int months = Integer.parseInt(month);
-        int dates = Integer.parseInt(date);
-        // and here i actually read the assignment.
-        return();
+        // Obtain the total seconds since midnight, Jan 1, 1970
+        long totalSeconds = totalMilliseconds / 1000;
+
+        // Obtain the total minutes
+        long totalMinutes = totalSeconds / 60;
+
+        // Obtain the total hours
+        long totalHours = totalMinutes / 60;
+
+        // Obtain total hour in a year
+        long hourpyear = 24 * 365;
+
+        // Obtain past year since 1970
+        long yearpassed = totalHours / hourpyear;
+
+        // Display results
+        return (yearpassed + 1970);
     }
-     */
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
+        AgeComparison time = new AgeComparison();
+
 
         System.out.println("who are we comparing? ");
         String name1 = scanner.nextLine();
 
         System.out.println("and? ");
         String name2 = scanner.nextLine();
+
+        System.out.println("date input format is YYYYMMDD");
 
         System.out.print("input date of birth for " + name1 + ": ");
         int dob1 = scanner.nextInt(); //input style == YYYYMMDD
@@ -52,6 +70,14 @@ public class AgeComparison {
         int year2 = dob2 / 10000;
         int month2 = (dob2 % 10000) / 100;
         int day2 = dob2 % 100;
+
+        //stop program when false
+        if (month1 > 12 | month2 > 12 || day1 > 31 | day2 > 31 || year1 > time.CurrentTime() | year2 > time.CurrentTime()) {
+            System.out.println();
+            System.out.println("probably wrong input...");
+            System.exit(1);
+        }
+
 
         System.out.println();
         // print date of birth in MMDDYYYY format
@@ -87,3 +113,5 @@ public class AgeComparison {
 
     }
 }
+
+
